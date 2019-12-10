@@ -15,6 +15,7 @@ const Profile = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             const userId = props.match.params.id
+                        console.log('sfhdlsdlkfh')
             const data = await fetch(`${config.apiUrl}/employee/${userId}`, {
                 headers: {
                     'x-access-token': `${window.localStorage.getItem('accessToken')}`
