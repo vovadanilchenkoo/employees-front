@@ -1,5 +1,5 @@
 ## Front-end for react/react-router CRUD app
-Demo - https://postgres-crud.herokuapp.com/
+Demo - https://postgres-crud.herokuapp.com
 
 ## Available Scripts
 
