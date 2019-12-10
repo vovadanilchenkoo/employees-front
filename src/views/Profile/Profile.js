@@ -61,6 +61,7 @@ const Profile = (props) => {
             },
             body: payload
         })
+        // TODO: add tooltip for updated content
         const response = await request.json()
         console.log(response)
     }

@@ -26,6 +26,7 @@ const App = () => (
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
           <Route path="/create-employee" component={CreateEmployee} />
+          {/* TODO: how must be declared ErrorBoundary component  */}
           <Route path="/employees-table" component={EmployeesList} />
           <Route path="/employee/:id" component={Profile} />
       </Switch>
