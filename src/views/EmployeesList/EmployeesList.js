@@ -8,7 +8,7 @@ const EmployeesList = () => {
   const [employees, setEmployees] = useState([])
   const [notificationData, setNotificationData] = useState({
     isShow: false,
-    value: ''
+    values: []
   })
 
   useEffect(() => {
@@ -32,18 +32,7 @@ const EmployeesList = () => {
         'x-access-token': `${window.localStorage.getItem('accessToken')}`,
       }
     })
-    if (request.status === 204) {
-      setNotificationData({
-        isShow: true,
-        value: 'Employee was successfuly deleted'
-      })
-
-      setTimeout(() => {
-        setNotificationData(state => {
-          return {...state, isShow: false}
-        })
-      }, 5000)
-    }
+    
     // TODO: Add error handling
     // this request is repeated, put him to separate function
     const fetchEmployees = await fetch(`${config.apiUrl}/employees-list`, {
@@ -53,6 +42,13 @@ const EmployeesList = () => {
     })
     const response = await fetchEmployees.json()
     setEmployees(response.rows)
+
+    if (request.status === 204) {
+      setNotificationData({
+        isShow: true,
+        value: "Employee was successfuly deleted"
+      })
+    }
   }
 
   const employeesList = employees.map(el => (
