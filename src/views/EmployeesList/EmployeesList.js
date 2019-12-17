@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { config } from '../../config'
 import './EmployeesList.sass'
+import Notification from '../../components/Notification/Notification'
 
 const EmployeesList = () => {
   const [employees, setEmployees] = useState([])
+  const [notificationData, setNotificationData] = useState({
+    isShow: false,
+    value: ''
+  })
 
   useEffect(() => {
     async function fetchData() {
@@ -27,18 +32,27 @@ const EmployeesList = () => {
         'x-access-token': `${window.localStorage.getItem('accessToken')}`,
       }
     })
+    if (request.status === 204) {
+      setNotificationData({
+        isShow: true,
+        value: 'Employee was successfuly deleted'
+      })
 
+      setTimeout(() => {
+        setNotificationData(state => {
+          return {...state, isShow: false}
+        })
+      }, 5000)
+    }
     // TODO: Add error handling
     // this request is repeated, put him to separate function
     const fetchEmployees = await fetch(`${config.apiUrl}/employees-list`, {
       headers: {
-        // TODO: accessToken to redux, for global sharing 
         'x-access-token': `${window.localStorage.getItem('accessToken')}`
       }
     })
     const response = await fetchEmployees.json()
     setEmployees(response.rows)
-    
   }
 
   const employeesList = employees.map(el => (
@@ -83,6 +97,8 @@ const EmployeesList = () => {
           {employeesList}
         </tbody>
       </table>
+
+      <Notification show={notificationData.isShow} value={notificationData.value} />
     </div>
   )
 }

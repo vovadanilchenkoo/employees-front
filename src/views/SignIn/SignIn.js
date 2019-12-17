@@ -39,27 +39,27 @@ const SignIn = () => {
     }
 
     return (
-        <div className="sign-in-wrap">
-            <h1 className="center-align">Sign in</h1>
-            <form className="sign-in-form">
-                <div className="sign-in-item input-field col s6">
-                    <input id="email" onChange={setData} type="text" />
-                    <label htmlFor="email">Email</label>
-                </div>
-                <div className="sign-in-item input-field col s6">
-                    <input id="password" onChange={setData} type="password" aria-autoComplete="list" />
-                    <label htmlFor="password">Password</label>
-                </div>
-                <button 
-                    type="submit"
-                    onClick={signIn}
-                    className="btn waves-effect waves-light" 
-                >
-                    Submit
-                    <i className="material-icons right">send</i>
-                </button>
-            </form>
-        </div>
+      <div className="sign-in-wrap">
+          <h1 className="center-align">Sign in</h1>
+          <form className="sign-in-form">
+              <div className="sign-in-item input-field col s6">
+                  <input id="email" onChange={setData} type="text" />
+                  <label htmlFor="email">Email</label>
+              </div>
+              <div className="sign-in-item input-field col s6">
+                  <input id="password" onChange={setData} type="password" />
+                  <label htmlFor="password">Password</label>
+              </div>
+              <button 
+                  type="submit"
+                  onClick={signIn}
+                  className="btn waves-effect waves-light" 
+              >
+                  Submit
+                  <i className="material-icons right">send</i>
+              </button>
+          </form>
+      </div>
     )
 }
 

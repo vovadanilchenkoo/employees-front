@@ -1,0 +1,33 @@
+.notification
+  font-family: Roboto,sans-serif
+  font-weight: 400
+  font-size: 14px
+  color: #fff
+  background-color: #333
+  padding: 14px 16px
+  border-radius: 4px
+  position: absolute
+  left: 25px
+  bottom: 25px
+  width: 100%
+  max-width: 344px
+  text-align: left
+  opacity: 0
+  pointer-events: none
+  transform: scale(.8)
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)
+  transition: opacity .15s cubic-bezier(0,0,.2,1) 0ms,transform .15s cubic-bezier(0,0,.2,1) 0ms,-webkit-transform .15s cubic-bezier(0,0,.2,1) 0ms
+  
+.enter 
+  opacity: 0
+  transform: scale(.8)
+
+.enter-active 
+  opacity: 1
+  transform: scale(1)
+  transition: opacity .15s cubic-bezier(0,0,.2,1) 0ms,transform .15s cubic-bezier(0,0,.2,1) 0ms,-webkit-transform .15s cubic-bezier(0,0,.2,1) 0ms
+
+.enter-done
+  opacity: 0
+  transform: scale(.8)
+  transition: opacity .15s cubic-bezier(0,0,.2,1) 0ms,transform .15s cubic-bezier(0,0,.2,1) 0ms,-webkit-transform .15s cubic-bezier(0,0,.2,1) 0ms
