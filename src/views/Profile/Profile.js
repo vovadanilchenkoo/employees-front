@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Profile.sass'
 import { config } from '../../config'
+import Notification from '../../components/Notification/Notification'
 
 const Profile = (props) => {
   const [profileData, setProfileData] = useState({
@@ -10,6 +11,10 @@ const Profile = (props) => {
     start_working_at: '',
     work_days: '',
     out_days: ''
+  })
+  const [notificationData, setNotificationData] = useState({
+    isShow: false,
+    values: []
   })
 
   useEffect(() => {
@@ -59,9 +64,20 @@ const Profile = (props) => {
       },
       body: payload
     })
-    // TODO: add tooltip for updated content
     const response = await request.json()
-    console.log(response)
+
+    if (response.message) {
+      setNotificationData({
+        isShow: true,
+        value: response.message
+      })
+
+      setTimeout(() => {
+        setNotificationData(state => {
+          return {...state, isShow: false}
+        })
+      }, 5000)
+    }
   }
 
   return (
@@ -69,20 +85,20 @@ const Profile = (props) => {
       <ul className="profile-data-list collection">
         <li className="profile-data-list__item collection-item">
           <div className="profile-data-list__inner">
-              <span className="profile-data-list__content">
-                {profileData.name}
-              </span>
-              <div className="profile-input-field input-field col s6">
-                <input 
-                  id="name" 
-                  type="text" 
-                  placeholder=" "
-                  value={profileData.name}
-                  onChange={inputHandler} 
-                  className="profile-data-list__input" 
-                />
-                <label htmlFor="name">Name</label>
-              </div>
+            <span className="profile-data-list__content">
+              {profileData.name}
+            </span>
+            <div className="profile-input-field input-field col s6">
+              <input 
+                id="name" 
+                type="text" 
+                placeholder=" "
+                value={profileData.name}
+                onChange={inputHandler} 
+                className="profile-data-list__input" 
+              />
+              <label htmlFor="name">Name</label>
+            </div>
           </div>
           <button 
             type="button"
@@ -94,20 +110,20 @@ const Profile = (props) => {
         </li>
         <li className="profile-data-list__item collection-item">
           <div className="profile-data-list__inner">
-              <span className="profile-data-list__content">
+            <span className="profile-data-list__content">
               {profileData.position}
-              </span>
-              <div className="profile-input-field input-field col s6">
-                <input 
-                  id="position" 
-                  type="text" 
-                  placeholder=""
-                  value={profileData.position}
-                  onChange={inputHandler} 
-                  className="profile-data-list__input" 
-                />
-                <label htmlFor="position">Position</label>
-              </div>
+            </span>
+            <div className="profile-input-field input-field col s6">
+              <input 
+                id="position" 
+                type="text" 
+                placeholder=""
+                value={profileData.position}
+                onChange={inputHandler} 
+                className="profile-data-list__input" 
+              />
+              <label htmlFor="position">Position</label>
+            </div>
           </div>
           <button 
             type="button"
@@ -119,20 +135,20 @@ const Profile = (props) => {
         </li>
         <li className="profile-data-list__item collection-item">
           <div className="profile-data-list__inner">
-              <span className="profile-data-list__content">
-                {profileData.salary}
-              </span>
-              <div className="profile-input-field input-field col s6">
-                <input 
-                  id="salary" 
-                  type="text" 
-                  placeholder=""
-                    value={profileData.salary}
-                  onChange={inputHandler} 
-                  className="profile-data-list__input" 
-                />
-                <label htmlFor="salary">Salary</label>
-              </div>
+            <span className="profile-data-list__content">
+              {profileData.salary}
+            </span>
+            <div className="profile-input-field input-field col s6">
+              <input 
+                id="salary" 
+                type="text" 
+                placeholder=""
+                  value={profileData.salary}
+                onChange={inputHandler} 
+                className="profile-data-list__input" 
+              />
+              <label htmlFor="salary">Salary</label>
+            </div>
           </div>
           <button 
             type="button"
@@ -144,20 +160,20 @@ const Profile = (props) => {
         </li>
         <li className="profile-data-list__item collection-item">
           <div className="profile-data-list__inner">
-              <span className="profile-data-list__content">
-                {profileData.start_working_at}
-              </span>
-              <div className="profile-input-field input-field col s6">
-                <input 
-                  id="start_working_at" 
-                  type="text" 
-                  placeholder=""
-                  value={profileData.start_working_at}
-                  onChange={inputHandler} 
-                  className="profile-data-list__input" 
-                />
-                <label htmlFor="start_working_at">Start working at</label>
-              </div>
+            <span className="profile-data-list__content">
+              {profileData.start_working_at}
+            </span>
+            <div className="profile-input-field input-field col s6">
+              <input 
+                id="start_working_at" 
+                type="text" 
+                placeholder=""
+                value={profileData.start_working_at}
+                onChange={inputHandler} 
+                className="profile-data-list__input" 
+              />
+              <label htmlFor="start_working_at">Start working at</label>
+            </div>
           </div>
           <button 
             type="button"
@@ -169,20 +185,20 @@ const Profile = (props) => {
         </li>
         <li className="profile-data-list__item collection-item">
           <div className="profile-data-list__inner">
-              <span className="profile-data-list__content">
-                {profileData.work_days}
-              </span>
-              <div className="profile-input-field input-field col s6">
-                <input 
-                  id="work_days" 
-                  type="text" 
-                  placeholder=""
-                  value={profileData.work_days}
-                  onChange={inputHandler} 
-                  className="profile-data-list__input" 
-                />
-                <label htmlFor="work_days">Work days</label>
-              </div>
+            <span className="profile-data-list__content">
+              {profileData.work_days}
+            </span>
+            <div className="profile-input-field input-field col s6">
+              <input 
+                id="work_days" 
+                type="text" 
+                placeholder=""
+                value={profileData.work_days}
+                onChange={inputHandler} 
+                className="profile-data-list__input" 
+              />
+              <label htmlFor="work_days">Work days</label>
+            </div>
           </div>
           <button 
             type="button"
@@ -194,20 +210,20 @@ const Profile = (props) => {
         </li>
         <li className="profile-data-list__item collection-item">
           <div className="profile-data-list__inner">
-              <span className="profile-data-list__content">
-                {profileData.out_days}
-              </span>
-              <div className="profile-input-field input-field col s6">
-                <input 
-                  id="out_days" 
-                  type="text" 
-                  placeholder=""
-                  value={profileData.out_days}
-                  onChange={inputHandler} 
-                  className="profile-data-list__input" 
-                />
-                <label htmlFor="out_days">Out days</label>
-              </div>
+            <span className="profile-data-list__content">
+              {profileData.out_days}
+            </span>
+            <div className="profile-input-field input-field col s6">
+              <input 
+                id="out_days" 
+                type="text" 
+                placeholder=""
+                value={profileData.out_days}
+                onChange={inputHandler} 
+                className="profile-data-list__input" 
+              />
+              <label htmlFor="out_days">Out days</label>
+            </div>
           </div>
           <button 
             type="button"
@@ -226,6 +242,8 @@ const Profile = (props) => {
         Submit
         <i className="material-icons right">send</i>
       </button>
+
+      <Notification show={notificationData.isShow} value={notificationData.value} />
     </div>
   )
 }
