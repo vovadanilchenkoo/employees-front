@@ -38,6 +38,10 @@ const SignIn = () => {
         }
     }
 
+    const authFb = async () => {
+        const 
+    }
+
     return (
       <div className="sign-in-wrap">
           <h1 className="center-align">Sign in</h1>
@@ -59,6 +63,15 @@ const SignIn = () => {
                   <i className="material-icons right">send</i>
               </button>
           </form>
+
+          <div className="auth-social-networks">
+              <button
+                onClick={authFb} 
+                type="button"
+              >
+                    Auth with facebook
+                </button>
+          </div>
       </div>
     )
 }

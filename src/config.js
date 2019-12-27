@@ -1,3 +1,4 @@
 export const config = {
-    apiUrl: 'https://api-postgres-crud.herokuapp.com'
+    apiUrl: 'http://localhost:3001'
+    // apiUrl: 'https://api-postgres-crud.herokuapp.com'
 }
