@@ -61,8 +61,9 @@ const SignIn = () => {
       </form>
 
       <div className="auth-social-networks">
-        <a href="/auth/facebook">
-          Auth with facebook
+        <a href="/auth/facebook" className="auth-social-networks__fb-auth waves-effect waves-light btn">
+          {/* <i className="material-icons left">cloud</i> */}
+          Continue with facebook
         </a>
       </div>
     </div>
