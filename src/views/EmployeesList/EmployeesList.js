@@ -1,44 +1,76 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { config } from '../../config'
+import config from '../../config'
+import { getFromLocalStorage, isTokenEpired } from '../../token'
 import './EmployeesList.sass'
 
-const EmployeesList = () => {
+const EmployeesList = (props) => {
   const [employees, setEmployees] = useState([])
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetch(`${config.apiUrl}/employees-list`, {
+      await isTokenEpired()
+    
+      const data = await fetch(`${config.apiUrl}/employees/list`, {
+        method: 'GET',
         headers: {
-          'x-access-token': `${window.localStorage.getItem('accessToken')}`
+          'Content-Type': 'application/json',
+          'x-access-token': `${getFromLocalStorage('accessToken')}`
         }
       })
       const response = await data.json()
-      setEmployees(response.rows)
+      setEmployees(response.data || [])
     }
 
     fetchData()
   }, [])
 
   const deleteEmployee = async (id) => {
+    await isTokenEpired()
+
     const request = await fetch(`${config.apiUrl}/employee/${id}`, {
       method: 'DELETE',
       headers: {
-        'x-access-token': `${window.localStorage.getItem('accessToken')}`,
+        'Content-Type': 'application/json',
+        'x-access-token': `${getFromLocalStorage('accessToken')}`,
       }
     })
-
+    
     // TODO: Add error handling
     // this request is repeated, put him to separate function
-    const fetchEmployees = await fetch(`${config.apiUrl}/employees-list`, {
+    const fetchEmployees = await fetch(`${config.apiUrl}/employees/list`, {
+      method: 'GET',
       headers: {
-        // TODO: accessToken to redux, for global sharing 
-        'x-access-token': `${window.localStorage.getItem('accessToken')}`
+        'Content-Type': 'application/json',
+        'x-access-token': `${getFromLocalStorage('accessToken')}`
       }
     })
     const response = await fetchEmployees.json()
-    setEmployees(response.rows)
-    
+    setEmployees(response.data || [])
+
+    if(response.message) {
+      props.setNotificationData({
+        isShow: true,
+        value: response.message
+      })
+
+      setTimeout(() => {
+        props.setNotificationData(state => {
+          return {...state, isShow: false}
+        })
+      }, 5000)
+    } else {
+      props.setNotificationData({
+        isShow: true,
+        value: "Employee was successfuly deleted"
+      })
+
+      setTimeout(() => {
+        props.setNotificationData(state => {
+          return {...state, isShow: false}
+        })
+      }, 5000)
+    }
   }
 
   const employeesList = employees.map(el => (
@@ -66,7 +98,7 @@ const EmployeesList = () => {
   ))
 
   return (
-    <div className="employees-list-wrap">
+    <div className="employees/list-wrap">
       <h1 className="center-align">Employees list</h1>
       <table className="striped">
         <thead>
