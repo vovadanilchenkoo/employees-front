@@ -80,7 +80,7 @@ const Profile = (props) => {
     } else {
       props.setNotificationData({
         isShow: true,
-        value: 'Employee was successfuly created'
+        value: 'Employee was successfuly updated'
       })
 
       setTimeout(() => {
